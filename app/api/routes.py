@@ -1,15 +1,17 @@
 """API routes for the nameday service."""
 
 from datetime import date, timedelta
-from typing import List, Dict, Any
-from fastapi import APIRouter, HTTPException, Path
+from typing import Any, Dict, List
 
+from fastapi import APIRouter, HTTPException, Path, Request
+
+from app.core.config import DEFAULT_RATE_LIMIT, logger
+from app.core.rate_limit import limiter
+from app.models.schemas import APIResponse, CelebrationDate, NamedayEntry
 from app.services.nameday_service import (
     fetch_and_parse_month_data,
     fetch_name_celebration_dates,
 )
-from app.core.config import logger
-from app.models.schemas import NamedayEntry, CelebrationDate, APIResponse
 
 router = APIRouter()
 
@@ -17,7 +19,8 @@ router = APIRouter()
 @router.get(
     "/today", response_model=NamedayEntry, summary="Get today's nameday information"
 )
-async def get_today_nameday() -> Dict[str, Any]:
+@limiter.limit(DEFAULT_RATE_LIMIT)
+async def get_today_nameday(request: Request) -> Dict[str, Any]:
     """
     Returns the list of names celebrating today and the associated saints/feasts.
     Uses cached monthly data.
@@ -54,7 +57,8 @@ async def get_today_nameday() -> Dict[str, Any]:
     response_model=NamedayEntry,
     summary="Get tomorrow's nameday information",
 )
-async def get_tomorrow_nameday() -> Dict[str, Any]:
+@limiter.limit(DEFAULT_RATE_LIMIT)
+async def get_tomorrow_nameday(request: Request) -> Dict[str, Any]:
     """
     Returns the list of names celebrating tomorrow and the associated saints/feasts.
     Uses cached monthly data.
@@ -90,7 +94,8 @@ async def get_tomorrow_nameday() -> Dict[str, Any]:
     response_model=List[NamedayEntry],
     summary="Get nameday information for the current month",
 )
-async def get_current_month_namedays() -> List[Dict[str, Any]]:
+@limiter.limit(DEFAULT_RATE_LIMIT)
+async def get_current_month_namedays(request: Request) -> List[Dict[str, Any]]:
     """
     Returns a list of all nameday entries for the current calendar month.
     Uses cached monthly data.
@@ -113,10 +118,12 @@ async def get_current_month_namedays() -> List[Dict[str, Any]]:
     response_model=List[NamedayEntry],
     summary="Get nameday information for a specific month",
 )
+@limiter.limit(DEFAULT_RATE_LIMIT)
 async def get_specific_month_namedays(
+    request: Request,
     month_num: int = Path(
         ..., title="Month Number", description="Month number (1-12)", ge=1, le=12
-    )
+    ),
 ) -> List[Dict[str, Any]]:
     """
     Returns a list of all nameday entries for the specified month number (1-12).
@@ -143,10 +150,12 @@ async def get_specific_month_namedays(
     response_model=List[CelebrationDate],
     summary="Search celebration dates for a specific name (direct lookup)",
 )
+@limiter.limit(DEFAULT_RATE_LIMIT)
 async def search_name_dates_direct(
+    request: Request,
     name: str = Path(
         ..., title="Name to Search", description="The Greek name to search for"
-    )
+    ),
 ) -> List[Dict[str, Any]]:
     """
     Searches for celebration dates for the specified name using the direct
@@ -171,5 +180,6 @@ async def search_name_dates_direct(
 
 
 @router.get("/", response_model=APIResponse, summary="API Root/Health Check")
-async def read_root():
+@limiter.limit(DEFAULT_RATE_LIMIT)
+async def read_root(request: Request):
     return {"message": "Greek Nameday API is running. See /docs for details."}

@@ -1,19 +1,21 @@
-"""Main application entry point."""
-
 from fastapi import FastAPI
-from app.api.routes import router
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
-# Create FastAPI app
+from app.api.routes import router
+from app.core.rate_limit import limiter
+
 app = FastAPI(
     title="Greek Nameday API",
     description="Fetches nameday information (celebrating names and saints) from eortologio.net",
     version="1.0.0",
 )
 
-# Include API routes
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 app.include_router(router)
 
-# Run the app if executed directly
 if __name__ == "__main__":
     import uvicorn
 

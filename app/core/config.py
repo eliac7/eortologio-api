@@ -3,17 +3,13 @@
 import logging
 from typing import Dict
 
-# --- Configuration ---
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Base URL for the eortologio.net website
 BASE_URL = "https://www.eortologio.net"
-
-# Cache duration in seconds (6 hours)
 CACHE_DURATION_SECONDS = 6 * 60 * 60
+DEFAULT_RATE_LIMIT = "20/minute"
 
-# Greek month names mapping (genitive case to number)
 MONTH_NAMES_GREEK_GENITIVE: Dict[str, int] = {
     "Ιανουαρίου": 1,
     "Φεβρουαρίου": 2,
@@ -22,14 +18,13 @@ MONTH_NAMES_GREEK_GENITIVE: Dict[str, int] = {
     "Μαΐου": 5,
     "Ιουνίου": 6,
     "Ιουλίου": 7,
-    "Αυγούστου": 8,
+    "Α����ο����τ��υ": 8,
     "Σεπτεμβρίου": 9,
     "Οκτωβρίου": 10,
     "Νοεμβρίου": 11,
     "Δεκεμβρίου": 12,
 }
 
-# Greek month names mapping (number to nominative case)
 MONTH_NAMES_GREEK_NOMINATIVE: Dict[int, str] = {
     1: "Ιανουάριος",
     2: "Φεβρουάριος",
@@ -41,6 +36,6 @@ MONTH_NAMES_GREEK_NOMINATIVE: Dict[int, str] = {
     8: "Αύγουστος",
     9: "Σεπτέμβριος",
     10: "Οκτώβριος",
-    11: "Νοέμβριος",
+    11: "��ο��μβριος",
     12: "Δεκέμβριος",
 }
