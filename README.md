@@ -48,7 +48,27 @@ eortologio-api/
 
 ## Installation
 
-### Traditional Setup
+### Prerequisites
+
+- Python 3.11 or higher
+- `uv` package manager (recommended) or `pip`
+
+### Installing uv
+
+Choose one of these methods to install `uv`:
+
+```bash
+# Using the official installer (recommended)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Or using pip
+pip install uv
+
+# Or using pipx (for isolated installation)
+pipx install uv
+```
+
+### Project Setup
 
 1. Clone the repository:
 
@@ -57,52 +77,82 @@ git clone https://github.com/eliac7/eortologio-api.git
 cd eortologio-api
 ```
 
-2. Create and activate a virtual environment (optional but recommended):
+2. Create and activate a virtual environment:
 
 ```bash
-python -m venv .venv
-# On Windows
+# Create a virtual environment with uv
+uv venv
+# Activate it (Windows)
 .venv\Scripts\activate
-# On macOS/Linux
+# Activate it (macOS/Linux)
 source .venv/bin/activate
 ```
 
 3. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+# Install project dependencies
+uv pip install .
+
+# For development dependencies
+uv pip install -e ".[dev]"
 ```
 
 ### Docker Setup
 
-1. Clone the repository:
+1. Build and start the container:
 
 ```bash
-git clone https://github.com/eliac7/eortologio-api.git
-cd eortologio-api
-```
-
-2. Build and start the Docker container:
-
-```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 The API will be available at http://localhost:8000.
 
-## Usage
+## Development
+
+### Installing Development Dependencies
+
+```bash
+uv pip install -e ".[dev]"
+```
+
+### Running Tests
+
+```bash
+uv run pytest
+```
 
 ### Running the API Locally
 
 ```bash
-# From the project root directory
-uvicorn app.main:app --reload
+# Using uvicorn directly
+uv run -- uvicorn app.main:app --reload
 
-# Or using the Python module
-python -m app.main
+# Or using the installed script
+uv run eortologio-api-server
 ```
 
 The API will be available at http://127.0.0.1:8000.
+
+### Adding New Dependencies
+
+```bash
+# Add a production dependency
+uv pip install package-name
+
+# Add a development dependency
+uv pip install package-name[dev]
+```
+
+### Updating Dependencies
+
+```bash
+# Update all dependencies
+uv pip install --upgrade .
+
+# Update specific package
+uv pip install --upgrade package-name
+```
 
 ### API Documentation
 
@@ -122,10 +172,10 @@ Once the application is running, you can access:
 
 ## Docker Commands
 
-- Start the container: `docker-compose up -d`
-- Stop the container: `docker-compose down`
-- View logs: `docker-compose logs -f`
-- Rebuild the container: `docker-compose up -d --build`
+- Build and start: `docker compose up -d`
+- Stop: `docker compose down`
+- View logs: `docker compose logs -f`
+- Rebuild: `docker compose up -d --build`
 
 ## License
 

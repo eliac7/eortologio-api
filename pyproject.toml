@@ -1,0 +1,33 @@
+[project]
+name = "eortologio-api"
+version = "1.0.0"
+description = "Fetches nameday information (celebrating names and saints) from eortologio.net"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Ilias Nikolaos Thalassochoritis", email = "iliascodes@gmail.com" }
+]
+keywords = ["nameday", "greek", "saints", "api"]
+dependencies = [
+    "fastapi==0.103.1",
+    "uvicorn==0.23.2",
+    "requests==2.31.0",
+    "beautifulsoup4==4.12.2",
+    "lxml==4.9.3",
+    "cachetools==5.3.1",
+    "pydantic==2.3.0",
+    "slowapi==0.1.9",
+]
+
+[project.scripts]
+eortologio-api-server = "app.main:start_server"
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+environments = [
+    "implementation_name == 'cpython'"
+]
