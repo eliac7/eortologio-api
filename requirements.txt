@@ -7,16 +7,15 @@ certifi==2025.11.12
 charset-normalizer==3.4.4
 click==8.3.1
 colorama==0.4.6
-Deprecated==1.3.1
--e git+https://github.com/eliac7/eortologio-api.git@c748b5fabce7356561d19581b9a5d478968ca83a#egg=eortologio_api
-fastapi==0.127.0
+deprecated==1.3.1
+fastapi==0.128.0
 h11==0.16.0
 idna==3.11
 limits==5.6.0
 lxml==6.0.2
 packaging==25.0
 pydantic==2.12.5
-pydantic_core==2.41.5
+pydantic-core==2.41.5
 python-dateutil==2.9.0.post0
 requests==2.32.5
 six==1.17.0
@@ -25,7 +24,7 @@ sniffio==1.3.1
 soupsieve==2.8.1
 starlette==0.50.0
 typing-inspection==0.4.2
-typing_extensions==4.15.0
+typing-extensions==4.15.0
 urllib3==2.6.2
 uvicorn==0.40.0
 wrapt==2.0.1
