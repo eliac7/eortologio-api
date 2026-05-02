@@ -62,8 +62,10 @@ typing-inspection==0.4.2 ; implementation_name == 'cpython'
     # via
     #   fastapi
     #   pydantic
-urllib3==2.4.0 ; implementation_name == 'cpython'
-    # via requests
+urllib3==2.6.3 ; implementation_name == 'cpython'
+    # via
+    #   eortologio-api
+    #   requests
 uvicorn==0.46.0 ; implementation_name == 'cpython'
     # via eortologio-api
 wrapt==1.17.2 ; implementation_name == 'cpython'
