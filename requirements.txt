@@ -3,8 +3,10 @@ annotated-doc==0.0.4 ; implementation_name == 'cpython'
     # via fastapi
 annotated-types==0.7.0 ; implementation_name == 'cpython'
     # via pydantic
-anyio==3.7.1 ; implementation_name == 'cpython'
-    # via starlette
+anyio==4.15.1 ; implementation_name == 'cpython'
+    # via
+    #   eortologio-api
+    #   starlette
 beautifulsoup4==4.14.3 ; implementation_name == 'cpython'
     # via eortologio-api
 cachetools==7.1.0 ; implementation_name == 'cpython'
@@ -43,14 +45,15 @@ requests==2.33.1 ; implementation_name == 'cpython'
     # via eortologio-api
 slowapi==0.1.9 ; implementation_name == 'cpython'
     # via eortologio-api
-sniffio==1.3.1 ; implementation_name == 'cpython'
-    # via anyio
-soupsieve==2.8.4 ; implementation_name == 'cpython'
-    # via beautifulsoup4
+soupsieve==2.9.2 ; implementation_name == 'cpython'
+    # via
+    #   beautifulsoup4
+    #   eortologio-api
 starlette==1.3.1 ; implementation_name == 'cpython'
     # via fastapi
-typing-extensions==4.15.0 ; implementation_name == 'cpython'
+typing-extensions==4.16.0 ; implementation_name == 'cpython'
     # via
+    #   anyio
     #   beautifulsoup4
     #   fastapi
     #   limits
