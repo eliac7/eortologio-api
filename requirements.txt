@@ -11,8 +11,10 @@ beautifulsoup4==4.14.3 ; implementation_name == 'cpython'
     # via eortologio-api
 cachetools==7.1.0 ; implementation_name == 'cpython'
     # via eortologio-api
-certifi==2025.4.26 ; implementation_name == 'cpython'
-    # via requests
+certifi==2026.10.23 ; implementation_name == 'cpython'
+    # via
+    #   eortologio-api
+    #   requests
 charset-normalizer==3.4.2 ; implementation_name == 'cpython'
     # via requests
 click==8.1.8 ; implementation_name == 'cpython'
@@ -65,7 +67,7 @@ typing-inspection==0.4.2 ; implementation_name == 'cpython'
     # via
     #   fastapi
     #   pydantic
-urllib3==2.7.0 ; implementation_name == 'cpython'
+urllib3==2.8.0 ; implementation_name == 'cpython'
     # via
     #   eortologio-api
     #   requests
